@@ -569,13 +569,15 @@ export default function Gallery({
 function GalleryClip({ shot }: { shot: SphereShot }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);
+  const wantsPlay = useRef(false);
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) setNear(true);
-        if (e.intersectionRatio > 0.3) void v.play().catch(() => {});
+        wantsPlay.current = e.intersectionRatio > 0.3;
+        if (wantsPlay.current) void v.play().catch(() => {});
         else v.pause();
       },
       { rootMargin: "300px", threshold: [0, 0.3] }
@@ -583,6 +585,12 @@ function GalleryClip({ shot }: { shot: SphereShot }) {
     io.observe(v);
     return () => io.disconnect();
   }, []);
+  // The observer's first play() call can land before `near` has re-rendered
+  // the element with its real `src` — nothing to play yet, so it fails
+  // silently and never fires again on its own. Retry once the src is on.
+  useEffect(() => {
+    if (near && wantsPlay.current) void ref.current?.play().catch(() => {});
+  }, [near]);
   return (
     <video
       ref={ref}

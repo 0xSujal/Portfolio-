@@ -7,6 +7,40 @@
   --line:   #e8e8e8;
   --tick:   #ededeb;
   --surface:#f4f4f4;
+  /* Hairline ring around a tile, and the switch pill's ambient glow — dark
+     in light mode, flipped to light-on-dark below so an edge still reads
+     against whichever paper it sits on. */
+  --edge:      rgb(0 0 0 / 0.15);
+  --edge-soft: rgb(0 0 0 / 0.12);
+  --glow:      rgb(255 255 255 / 0.9);
+}
+
+/* System preference, unless the visitor has picked explicitly (below). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:  #000000;
+    --ink:    #f1f1ef;
+    --muted:  #8f8f96;
+    --line:   #2a2a30;
+    --tick:   #232328;
+    --surface:#1f1f24;
+    --edge:      rgb(255 255 255 / 0.14);
+    --edge-soft: rgb(255 255 255 / 0.11);
+    --glow:      rgb(0 0 0 / 0.6);
+  }
+}
+
+/* Explicit choice, either direction, wins over system preference. */
+:root[data-theme="dark"] {
+  --paper:  #000000;
+  --ink:    #f1f1ef;
+  --muted:  #8f8f96;
+  --line:   #2a2a30;
+  --tick:   #232328;
+  --surface:#1f1f24;
+  --edge:      rgb(255 255 255 / 0.14);
+  --edge-soft: rgb(255 255 255 / 0.11);
+  --glow:      rgb(0 0 0 / 0.6);
 }
 
 @theme inline {
@@ -210,7 +244,9 @@ a { color: inherit; }
 }
 .tl-avatar-logo {
   border-radius: 0.75rem;
-  background: var(--surface);
+  /* Fixed, not themed: marks are dark-on-transparent, drawn for a light
+     tile. On a dark surface they would vanish along with it. */
+  background: #ffffff;
   display: grid;
   place-items: center;
 }
@@ -274,7 +310,18 @@ a { color: inherit; }
   margin: 0 auto 2rem;
   padding-top: 4.5rem;
 }
-.pnav-index { display: inline-block; }
+.pnav-index {
+  display: inline-flex;
+  align-items: center;
+  height: 2.2rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  transition: background-color 0.2s ease;
+}
+.pnav-index:hover { background: var(--line); }
 .pnav-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.3rem; }
 .pnav-item { color: var(--muted); transition: color 0.2s ease; }
 .pnav-item:hover { color: var(--ink); }
@@ -319,28 +366,15 @@ a { color: inherit; }
   background: var(--line);
 }
 
-/* View switch on a project page. */
-/* Out of the flow and into the corner, over the work. Inverts against it
-   like the index does, so it reads on anything. */
-/* Centred at the foot of the canvas, floating over the work. It needs a
-   ground of its own there, so it carries one: a white pill with a soft white
-   halo, which separates it from dark artwork, plus a hairline and a faint
-   neutral shadow so it still reads on paper. */
-.mode-switch {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 2.25rem;
-  z-index: 61;
-  display: flex;
+/* View switch on a project page, parked in the nav rail under the
+   categories rather than floating over the work. */
+.pnav-modes {
+  margin-top: 2.5rem;
+  display: inline-flex;
   gap: 0.25rem;
   padding: 0.3rem;
   border-radius: 999px;
-  background: var(--paper);
-  box-shadow:
-    0 0 0 1px var(--line),
-    0 10px 34px rgb(255 255 255 / 0.9),
-    0 2px 12px rgb(0 0 0 / 0.07);
+  background: var(--surface);
 }
 .mode-btn {
   display: grid;
@@ -365,10 +399,32 @@ a { color: inherit; }
 }
 .mode-btn { cursor: pointer; }
 
+/* Present on every page, top-right, above everything else so the wall's
+   own fixed layers never cover it. */
+.theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--line), 0 2px 12px rgb(0 0 0 / 0.07);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.theme-toggle:hover { color: var(--muted); }
+
 /* Gallery images carry the same hairline edge as the preview. Drawn outside
    the box rather than inset, so it rings the image instead of overlapping
    its first row of pixels. */
-.shot { box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.15); }
+.shot { box-shadow: 0 0 0 0.5px var(--edge); }
 
 /* Hover preview, parked beside the hovered row. */
 .work-preview {
@@ -383,7 +439,7 @@ a { color: inherit; }
   transform: translateY(-50%);
   /* A hairline edge outside the box, so a light image still reads against
      the page without the ring covering any of it. */
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 0 0.5px var(--edge);
   /* Fades on first appearance; position only animates once placed. */
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -429,7 +485,7 @@ a { color: inherit; }
   overflow: hidden;
   border-radius: 3px;
   background: var(--surface);
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 0 0.5px var(--edge);
 }
 .grid-cell a { display: block; position: absolute; inset: 0; }
 
@@ -469,7 +525,7 @@ a { color: inherit; }
   overflow: hidden;
   border-radius: 3px;
   background: var(--surface);
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 0 0.5px var(--edge);
 }
 
 /* A play mark, so a video's still is not mistaken for a flat image. */
@@ -581,7 +637,7 @@ a { color: inherit; }
   border-radius: 4px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.12);
+  box-shadow: 0 0 0 0.5px var(--edge-soft);
   cursor: pointer;
 }
 .carousel-item img,
@@ -620,7 +676,7 @@ a { color: inherit; }
   border-radius: 4px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 0 0.5px var(--edge);
   will-change: transform, width, height;
 }
 .expander-media {
@@ -671,7 +727,7 @@ a { color: inherit; }
   border-radius: 4px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.12);
+  box-shadow: 0 0 0 0.5px var(--edge-soft);
   cursor: pointer;
   will-change: transform, width, height;
 }
@@ -791,7 +847,8 @@ a { color: inherit; }
 
 /* Nothing above the work: no header, no band, no column padding. The left
    panel is the only paper on the page. */
-.doc:has(.mode-switch) { padding-top: 0; padding-bottom: 0; }
+.doc:has(.wall),
+.doc:has(.gallery) { padding-top: 0; padding-bottom: 0; }
 /* The wall runs to the top edge; the grid begins on the Back link's line, so
    its first campaign heading and the index start together. It ends well
    short of the bottom, so the last row is not pinned to the window edge at

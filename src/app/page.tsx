@@ -2,7 +2,7 @@ import WorkList from "@/components/WorkList";
 import Portrait from "@/components/Portrait";
 import RowTable from "@/components/RowTable";
 import Timeline from "@/components/Timeline";
-import { PROFILE, CLIENTS, byYear, type Entry } from "@/lib/cv";
+import { PROFILE, CLIENTS, EXPERIENCE, byYear, totalDuration, type Entry } from "@/lib/cv";
 
 const X = `https://x.com/${PROFILE.x}`;
 const BEHANCE = `https://www.behance.net/${PROFILE.behance}`;
@@ -63,7 +63,7 @@ export default function Home() {
       </section>
 
       <section>
-        <p className="label">Experience</p>
+        <p className="label">Experience — {totalDuration(EXPERIENCE)}</p>
         <Timeline />
       </section>
 

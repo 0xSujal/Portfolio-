@@ -55,8 +55,7 @@ export default function Timeline() {
   // Clamped at read time, so a resize that changes tick sampling cannot leave
   // the index out of range — no state write needed to correct it.
   const month = ticks[Math.min(index, ticks.length - 1)] ?? months[0];
-  const roles = rolesAt(month);
-  const active = roles[0];
+  const active = rolesAt(month)[0];
   const brand = active?.color ?? "var(--ink)";
 
   const fit = useCallback(() => {
@@ -126,23 +125,20 @@ export default function Timeline() {
         style={labelX === null ? undefined : { left: `${labelX}px` }}
       >
         {/* Height is held whether or not a mark exists, so scrubbing past a
-            role without one does not jump the readout. */}
+            role without one does not jump the readout. One role at a time —
+            a boundary month where two roles' ranges touch shows whichever is
+            first in EXPERIENCE (the newer one), not a blend of both. */}
         <div className="tl-avatars">
-          {roles.map(
-            (r) =>
-              r.logo && (
-                <span key={r.title} className="tl-avatar tl-avatar-logo">
-                  {/* Marks are already sized and centred; a plain img keeps
-                      the optimiser from rasterising an SVG. */}
-                  <img src={r.logo} alt="" />
-                </span>
-              )
+          {active?.logo && (
+            <span className="tl-avatar tl-avatar-logo">
+              {/* Marks are already sized and centred; a plain img keeps
+                  the optimiser from rasterising an SVG. */}
+              <img src={active.logo} alt="" />
+            </span>
           )}
         </div>
 
-        <p className="tl-title">
-          {roles.map((r) => r.company || r.title).join("  &  ") || "—"}
-        </p>
+        <p className="tl-title">{active?.company || active?.title || "—"}</p>
         <p className="tl-dates">{active?.period ?? label(month)}</p>
       </div>
 
@@ -156,9 +152,12 @@ export default function Timeline() {
         >
           <div ref={track} className="tl-track">
             {ticks.map((m, i) => {
-              const inRole = roles.some(
-                (r) => m >= (r.from ?? "") && m <= (r.to ?? "")
-              );
+              // Only the active role's own span, not every role touching the
+              // hovered month — at a boundary tick two roles can match at
+              // once, and the loser's whole span must not tint with the
+              // winner's colour.
+              const inRole =
+                !!active && m >= (active.from ?? "") && m <= (active.to ?? "");
 
               // The hovered month takes the brand colour outright; the rest of
               // that role's span takes a 20% tint of it, mixed toward the page

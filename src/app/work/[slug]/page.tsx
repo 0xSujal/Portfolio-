@@ -2,13 +2,12 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   ALL_PROJECTS,
+  CATEGORIES,
   findProject,
-  siblingsOf,
-  type Shot,
+  leadProject,
   type SphereShot,
 } from "@/lib/work";
-import Showcase from "@/components/Showcase";
-import ProjectNav from "@/components/ProjectNav";
+import ProjectView from "@/components/ProjectView";
 import { PROFILE } from "@/lib/cv";
 
 export function generateStaticParams() {
@@ -77,27 +76,23 @@ export default async function ProjectPage({
     groups.push({ title: "", start: covered, count: allShots.length - covered });
   }
 
+  // One entry per category rather than per project, so the rail switches
+  // between Motion graphics / Visual Graphics / 3D Product render from
+  // anywhere, not just between projects inside the current one.
+  const categoryLinks = CATEGORIES.map((c) => {
+    const lead = leadProject(c);
+    return lead ? { slug: lead.slug, title: c.name } : null;
+  }).filter((l): l is { slug: string; title: string } => l !== null);
 
   return (
-    <>
-      <ProjectNav
-        siblings={siblingsOf(slug).map((p) => ({ slug: p.slug, title: p.title }))}
-        currentSlug={slug}
-      />
-
-      <main className="doc">
-        {/* One gallery, with the campaigns as runs inside it. Rendering a
-            Showcase per section gave a project with nine campaigns nine
-            separate galleries and nine view switches. */}
-        <Showcase
-          shots={flat}
-          allShots={allShots}
-          gridShots={allShots}
-          groups={groups}
-          title={project.title}
-        />
-
-      </main>
-    </>
+    <ProjectView
+      siblings={categoryLinks}
+      currentSlug={slug}
+      shots={flat}
+      allShots={allShots}
+      gridShots={allShots}
+      groups={groups}
+      title={project.title}
+    />
   );
 }

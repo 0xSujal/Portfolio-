@@ -3,7 +3,17 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Haptics from "@/components/Haptics";
+import ThemeToggle from "@/components/ThemeToggle";
 import { PROFILE } from "@/lib/cv";
+
+/** Runs before paint, so an explicit choice from a previous visit applies
+ *  immediately rather than flashing the system-default theme first. */
+const THEME_INIT = `
+try {
+  var t = localStorage.getItem('theme');
+  if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+`;
 
 /**
  * Saans (Displaay). These are TRIAL files and are deliberately not committed —
@@ -35,10 +45,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={saans.className}>
+    <html lang="en" className={saans.className} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
       <body>
         <SmoothScroll />
         <Haptics />
+        <ThemeToggle />
         {children}
       </body>
     </html>

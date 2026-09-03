@@ -93,12 +93,6 @@ export function categoryShots(c: Category): Shot[] {
   );
 }
 
-/** The other projects in a project's category, for the rail. */
-export function siblingsOf(slug: string) {
-  const cat = CATEGORIES.find((c) => c.projects.some((p) => p.slug === slug));
-  return cat ? cat.projects : [];
-}
-
 export function findProject(slug: string) {
   return ALL_PROJECTS.find((p) => p.slug === slug);
 }
