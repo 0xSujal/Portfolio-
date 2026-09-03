@@ -49,7 +49,7 @@ export default function Portrait({ alt }: { alt: string }) {
     >
       {/* Square source into a square tile, so object-cover crops nothing. */}
       <Image
-        src="/portrait.webp"
+        src="/portrait-sujal.webp"
         alt={alt}
         fill
         sizes="112px"

@@ -1,5 +1,4 @@
 import type { Category } from "./work";
-import { POSTS } from "./posts.generated";
 
 /**
  * Hand-added work that does not come from the Figma import. These are merged
@@ -390,54 +389,6 @@ export const MANUAL: Category[] = [
         width: KOSH_SHOTS[0].width,
         height: KOSH_SHOTS[0].height,
         shots: KOSH_SHOTS,
-        posts: POSTS,
-      },
-      {
-        slug: "stackr",
-        title: "Stackr",
-        intro:
-          "Brand and campaign design across three identities — Flux, then " +
-          "Ferrofluid, then Stackr — and the ETH Global campaign that ran on it.",
-        sections: STACKR_SECTIONS,
-        shots: STACKR_SHOTS,
-        cover: STACKR_SHOTS[0].src,
-        width: STACKR_SHOTS[0].width,
-        height: STACKR_SHOTS[0].height,
-      },
-      {
-        slug: "socket",
-        title: "Socket/Bungee",
-        intro:
-          "Brand and campaign design for Socket and Bungee — protocol " +
-          "announcements, the chain abstraction launch, and Bungee's identity " +
-          "and campaigns.",
-        sections: SOCKET_SECTIONS,
-        shots: SOCKET_SHOTS,
-        cover: SOCKET_SHOTS[0].src,
-        width: SOCKET_SHOTS[0].width,
-        height: SOCKET_SHOTS[0].height,
-      },
-      {
-        slug: "polygon",
-        title: "Polygon",
-        intro:
-          "Campaign and social design for Polygon — Ignite, BUIDL IT, the " +
-          "speaker series and the explainers around them.",
-        sections: POLYGON_SECTIONS,
-        shots: POLYGON_SHOTS,
-        cover: POLYGON_SHOTS[0].src,
-        width: POLYGON_SHOTS[0].width,
-        height: POLYGON_SHOTS[0].height,
-      },
-      {
-        slug: "sample-project",
-        title: "Placeholder project",
-        intro:
-          "Stand-in work, here so the category's project list has something to show. Replace when there is real work for it.",
-        cover: SAMPLE_SHOTS[0].src,
-        width: SAMPLE_SHOTS[0].width,
-        height: SAMPLE_SHOTS[0].height,
-        shots: SAMPLE_SHOTS,
       },
     ],
   },

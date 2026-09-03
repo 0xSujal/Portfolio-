@@ -11,15 +11,19 @@ import { PROFILE } from "@/lib/cv";
  * covers. See README for how to restore them locally; a web licence is
  * required before this ships anywhere public.
  */
-const saans = localFont({
-  src: [
-    { path: "../fonts/Saans-TRIAL-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/Saans-TRIAL-RegularItalic.woff2", weight: "400", style: "italic" },
-    { path: "../fonts/Saans-TRIAL-Medium.woff2", weight: "500", style: "normal" },
-  ],
-  display: "swap",
-  fallback: ["Inter", "system-ui", "sans-serif"],
-});
+// TEMP: Saans trial files aren't on this machine yet (see README > Fonts).
+// Falling back to system sans so the site builds locally; restore the real
+// localFont() call below once the trial files are copied into src/fonts/.
+const saans = { className: "" };
+// const saans = localFont({
+//   src: [
+//     { path: "../fonts/Saans-TRIAL-Regular.woff2", weight: "400", style: "normal" },
+//     { path: "../fonts/Saans-TRIAL-RegularItalic.woff2", weight: "400", style: "italic" },
+//     { path: "../fonts/Saans-TRIAL-Medium.woff2", weight: "500", style: "normal" },
+//   ],
+//   display: "swap",
+//   fallback: ["Inter", "system-ui", "sans-serif"],
+// });
 
 export const metadata: Metadata = {
   title: `${PROFILE.name}`,

@@ -1,12 +1,12 @@
-/** Source: Aditya Kalsaria — resume, July 2025. */
+/** Source: Sujal Kalsaria — LinkedIn experience, Sep 2026. */
 
 export const PROFILE = {
-  name: "Aditya Kalsaria",
-  role: "UI/Brand Designer",
-  email: "nvsadityakalsaria@gmail.com",
-  x: "AdityaKalsaria",
-  linkedin: "aditya-kalsaria-036279184",
-  dribbble: "adi_kalsaria_",
+  name: "Sujal Kalsaria",
+  role: "3D Motion Designer/ Assoc. Visual Designer",
+  email: "sujalkalsaria@gmail.com",
+  x: "sujalkalsaria",
+  linkedin: "sujal-kalsariya-71901523b",
+  behance: "sujalkalsariya",
 };
 
 export type Entry = {
@@ -28,26 +28,43 @@ export type Entry = {
   color?: string;
 };
 
-export const EXPERIENCE: Entry[] = [
-  { year: "2025", title: "Product & Brand Designer", company: "KOSH", color: "#131316", logo: "/logos/kosh.png", period: "Sep 2025 — Now", from: "2025-09", to: "2026-08" },
-  { year: "2025", title: "Senior UI/UX Designer", company: "BullX", color: "#58C88D", logo: "/logos/bullx.png", period: "Mar 2025 — Aug 2025", from: "2025-03", to: "2025-08" },
-  { year: "2024", title: "Senior Brand & Product Designer", company: "Stackr", color: "#222E3E", logo: "/logos/stackr.png", period: "Oct 2024 — Feb 2025", from: "2024-10", to: "2025-02" },
-  { year: "2023", title: "Lead Visual & Brand Designer", company: "Socket / Bungee", color: "#38E768", logo: "/logos/socket.png", period: "Feb 2023 — Oct 2024", from: "2023-02", to: "2024-09" },
-  { year: "2021", title: "Visual Designer, then UI Designer", company: "Polygon", color: "#6D03F6", logo: "/logos/polygon.png", period: "Sep 2021 — Feb 2023", from: "2021-09", to: "2023-01" },
-  { year: "2020", title: "Visual Designer", company: "IconScout", color: "#00C6FF", logo: "/logos/iconscout.png", period: "Sep 2020 — Sep 2021", from: "2020-09", to: "2021-08" },
-  { year: "2019", title: "Design Generalist", company: "GeeksLab", color: "#090909", logo: "/logos/geekslab.png", period: "Sep 2019 — Sep 2020", from: "2019-09", to: "2020-08" },
-];
+export const TIMELINE_FROM = "2021-06";
+export const TIMELINE_TO = "2026-09";
 
 export const CLIENTS: Entry[] = [
-  { year: "2025", title: "Dacoit.design", company: "UI design", period: "Jan — Jun" },
-  { year: "2024", title: "BoomFi", company: "Visual design", period: "Jun — Now" },
-  { year: "2024", title: "Flame.Live", company: "Visual design", period: "Nov — Feb 25" },
-  { year: "2024", title: "Superfluid", company: "Visual design", period: "Jul — Jan 25" },
-  { year: "2023", title: "Devfolio", company: "Visual / UI design", period: "Dec" },
-  { year: "2022", title: "MahaDAO", company: "UI design", period: "Dec — Feb 23" },
-  { year: "2022", title: "Infy Protocol", company: "Visual / UI design", period: "Aug — Oct" },
-  { year: "2021", title: "Timeswap", company: "Visual design", period: "Apr — Sep" },
-  { year: "2021", title: "Polytrade", company: "Illustration", period: "Apr — Jun" },
+  { year: "2025", title: "Dacoit.design", company: "3D motion graphics", period: "Jan — Jun", from: "2025-01", to: "2025-06" },
+  { year: "2024", title: "Dacoit.design", company: "3D motion graphics", period: "Jul — Dec", from: "2024-07", to: "2024-12" },
+  { year: "2022", title: "MahaDAO", company: "3D assets", period: "Dec — Feb 23", from: "2022-12", to: "2023-02" },
+  { year: "2022", title: "Polygon", company: "3D assets", period: "", from: undefined, to: undefined },
+  { year: "2021", title: "Timeswap", company: "3D animation", period: "Apr — Sep", from: "2021-04", to: "2021-09" },
+  { year: "2021", title: "Polytrade", company: "3D assets", period: "Apr — Jun", from: "2021-04", to: "2021-06" },
+];
+
+/** Earliest `from` to latest `to` across a set of entries, as "N years and M months". */
+export function totalDuration(entries: Entry[]): string {
+  const froms = entries.map((e) => e.from).filter((v): v is string => !!v).sort();
+  const tos = entries.map((e) => e.to).filter((v): v is string => !!v).sort();
+  const earliest = froms[0];
+  const latest = tos.at(-1);
+  if (!earliest || !latest) return "";
+
+  const [fy, fm] = earliest.split("-").map(Number);
+  const [ty, tm] = latest.split("-").map(Number);
+  const totalMonths = (ty - fy) * 12 + (tm - fm);
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  const yearPart = years ? `${years} year${years === 1 ? "" : "s"}` : "";
+  const monthPart = months ? `${months} month${months === 1 ? "" : "s"}` : "";
+  return yearPart && monthPart ? `${yearPart} and ${monthPart}` : yearPart || monthPart;
+}
+
+export const EXPERIENCE: Entry[] = [
+  { year: "2026", title: "Motion Designer", company: "Morphic", color: "#000000", logo: "/logos/morphic.png", period: "Sep 2026 — Now", from: "2026-09", to: "2026-09" },
+  { year: "2022", title: "Lead 3D and Visual Designer", company: "KOSH (previously Copperx)", color: "#131316", logo: "/logos/kosh.png", period: "Nov 2022 — Aug 2026", from: "2022-11", to: "2026-08" },
+  { year: "2022", title: "Freelance 3D Artist", company: "Freelance", color: "#22C55E", period: totalDuration(CLIENTS), from: "2022-09", to: "2022-10" },
+  { year: "2021", title: "3D Designer", company: "Scallopx", color: "#0F1AF0", logo: "/logos/scallop.png", period: "Sep 2021 — Aug 2022", from: "2021-09", to: "2022-08" },
+  { year: "2021", title: "3D Designer", company: "IconScout", color: "#00C6FF", logo: "/logos/iconscout.png", period: "Jun 2021 — Sep 2021", from: "2021-06", to: "2021-09" },
 ];
 
 /** Consecutive entries sharing a year become one group, newest first. */
@@ -73,6 +90,3 @@ export function monthsBetween(from: string, to: string): string[] {
   }
   return out;
 }
-
-export const TIMELINE_FROM = "2019-09";
-export const TIMELINE_TO = "2026-08";

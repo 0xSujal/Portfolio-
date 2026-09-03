@@ -46,9 +46,8 @@ export type Category = {
  * Aliases map the Figma page slugs onto them.
  */
 const CANONICAL: { id: string; name: string; aliases: string[] }[] = [
-  { id: "marketing-assets", name: "Visual design", aliases: ["marketing-assets", "marketing-aseets", "marketing"] },
-  { id: "product", name: "Product", aliases: ["product"] },
-  { id: "ui", name: "UI", aliases: ["ui"] },
+  { id: "motion-graphics", name: "Motion graphics", aliases: ["motion-graphics", "motion"] },
+  { id: "marketing-assets", name: "Visual Graphics", aliases: ["marketing-assets", "marketing-aseets", "marketing"] },
 ];
 
 const matched = new Set<string>();

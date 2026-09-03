@@ -5,8 +5,9 @@ import Timeline from "@/components/Timeline";
 import { PROFILE, CLIENTS, byYear, type Entry } from "@/lib/cv";
 
 const X = `https://x.com/${PROFILE.x}`;
-const DRIBBBLE = `https://dribbble.com/${PROFILE.dribbble}`;
+const BEHANCE = `https://www.behance.net/${PROFILE.behance}`;
 const LINKEDIN = `https://www.linkedin.com/in/${PROFILE.linkedin}`;
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${PROFILE.email}`;
 
 const toGroups = (entries: Entry[]) =>
   byYear(entries).map((g) => ({
@@ -14,7 +15,6 @@ const toGroups = (entries: Entry[]) =>
     items: g.items.map((e) => ({
       key: e.title + e.year + e.period,
       title: e.company ? `${e.title}, ${e.company}` : e.title,
-      meta: e.period,
     })),
   }));
 
@@ -43,15 +43,15 @@ export default function Home() {
             X
           </a>
           ,{" "}
-          <a className="link" href={DRIBBBLE} target="_blank" rel="noreferrer">
-            Dribbble
+          <a className="link" href={BEHANCE} target="_blank" rel="noreferrer">
+            Behance
           </a>{" "}
           and{" "}
           <a className="link" href={LINKEDIN} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
           , or reach me via{" "}
-          <a className="link" href={`mailto:${PROFILE.email}`}>
+          <a className="link" href={GMAIL_COMPOSE} target="_blank" rel="noreferrer">
             email
           </a>
           .
