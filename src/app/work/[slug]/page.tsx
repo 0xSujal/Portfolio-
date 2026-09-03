@@ -40,7 +40,7 @@ export default async function ProjectPage({
   const project = findProject(slug);
   if (!project) notFound();
 
-  const flat: Shot[] =
+  const flat: SphereShot[] =
     project.shots ??
     [{ src: project.cover, width: project.width ?? 4, height: project.height ?? 3 }];
 

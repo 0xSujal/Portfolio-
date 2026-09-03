@@ -28,8 +28,9 @@ export type Project = {
   width?: number;
   height?: number;
   cover: string;
-  /** Present when the project is a set rather than a single image. */
-  shots?: Shot[];
+  /** Present when the project is a set rather than a single image. May carry
+   *  video shots (`clip`/`video`) alongside stills. */
+  shots?: SphereShot[];
   /** Link previews for where this work was published. */
   posts?: Post[];
 };
@@ -48,6 +49,7 @@ export type Category = {
 const CANONICAL: { id: string; name: string; aliases: string[] }[] = [
   { id: "motion-graphics", name: "Motion graphics", aliases: ["motion-graphics", "motion"] },
   { id: "marketing-assets", name: "Visual Graphics", aliases: ["marketing-assets", "marketing-aseets", "marketing"] },
+  { id: "3d-render", name: "3D Product render", aliases: ["3d-render", "3d-renders", "3d"] },
 ];
 
 const matched = new Set<string>();
