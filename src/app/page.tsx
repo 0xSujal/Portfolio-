@@ -29,13 +29,23 @@ export default function Home() {
 
       <section>
         <p>
-          I&rsquo;m a self-taught designer working across visual design, 3D,
-          motion, icon design and art direction.
+          I&rsquo;m a self taught multidisciplinary designer working across 3D,
+          motion, visual design and art direction.
         </p>
         <p>
-          I currently work at KOSH, formerly Copperx, as a product and brand
-          designer. I led the rebrand, and I design the exchange, the mobile app
-          and the campaigns around them.
+          Since 2021, I&rsquo;ve explored different sides of design, from
+          creating 3D visuals and motion experiences to shaping visual
+          identities, product experiences and creative direction.
+        </p>
+        <p>
+          Currently at Morphic, working as a Visual Motion Designer and Design
+          Associate. My work spans across 3D, motion, design and art
+          direction, collaborating with creative and product teams to bring
+          ideas and experiences to life.
+        </p>
+        <p>
+          Previously, I was part of the founding team at KOSH (formerly
+          Copperx), contributing across brand, product and campaign design.
         </p>
         <p>
           You can find me on{" "}

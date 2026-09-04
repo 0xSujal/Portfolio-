@@ -895,5 +895,66 @@ a { color: inherit; }
   white-space: nowrap;
 }
 
+/* ── Loading screen ──────────────────────────────────────────────
+   Full-bleed over a project page while its wall or grid is still filling
+   with media. The ring turns and its hue drifts continuously — two
+   independent animations rather than one, so the sweep and the colour
+   never repeat in lockstep and it never reads as a fixed, stuck frame. */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.loading-screen.is-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+.loading-mark {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+/* A sibling of the globe, not its parent — masking the ring clips only the
+   ring's own box, so the globe beside it stays untouched. */
+.loading-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #22c55e,
+    #3b82f6,
+    #a855f7,
+    #ec4899,
+    #ef4444,
+    #eab308,
+    #22c55e
+  );
+  animation: loading-spin 2.2s linear infinite, loading-hue 3.6s linear infinite;
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+}
+.loading-globe {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--ink);
+}
+@keyframes loading-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes loading-hue {
+  to { filter: hue-rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-ring { animation: none; }
+}
 
 

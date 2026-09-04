@@ -38,7 +38,7 @@ const saans = { className: "" };
 export const metadata: Metadata = {
   title: `${PROFILE.name}`,
   description:
-    "Self-taught designer working across visual design, 3D, motion, icons and art direction. Currently at KOSH.",
+    "Self-taught multidisciplinary designer working across 3D, motion, visual design and art direction. Currently at Morphic.",
 };
 
 export default function RootLayout({

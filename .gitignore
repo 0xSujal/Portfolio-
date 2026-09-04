@@ -12,3 +12,4 @@ src/fonts/*.woff2
 src/fonts/*.woff
 src/fonts/*.otf
 src/fonts/*.ttf
+.vercel
