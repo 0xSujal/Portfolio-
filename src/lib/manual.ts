@@ -50,7 +50,6 @@ const MOTION_SHOTS = [
     { src: "/work/motion-graphics/reel/motion-42.b3117226.webp", width: 1000, height: 1000, clip: "/work/motion-graphics/reel/motion-42.b3117226.mp4", video: true },
     { src: "/work/motion-graphics/reel/motion-43.e9a989d8.webp", width: 720, height: 720, clip: "/work/motion-graphics/reel/motion-43.e9a989d8.mp4", video: true },
     { src: "/work/motion-graphics/reel/motion-44.ddc88d35.webp", width: 1080, height: 1080, clip: "/work/motion-graphics/reel/motion-44.ddc88d35.mp4", video: true },
-    { src: "/work/motion-graphics/reel/motion-45.968a0d56.webp", width: 960, height: 600, clip: "/work/motion-graphics/reel/motion-45.968a0d56.mp4", video: true },
     { src: "/work/motion-graphics/reel/motion-46.a12a5525.webp", width: 900, height: 1400, clip: "/work/motion-graphics/reel/motion-46.a12a5525.mp4", video: true },
     { src: "/work/motion-graphics/reel/motion-47.55a3bb51.webp", width: 1920, height: 1920, clip: "/work/motion-graphics/reel/motion-47.55a3bb51.mp4", video: true },
     { src: "/work/motion-graphics/reel/motion-48.6fd12d47.webp", width: 1920, height: 1920, clip: "/work/motion-graphics/reel/motion-48.6fd12d47.mp4", video: true },
