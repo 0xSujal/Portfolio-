@@ -2,7 +2,7 @@
 
 export const PROFILE = {
   name: "Sujal Kalsaria",
-  role: "Multidisciplinary Designer 3D, Motion & Art Direction",
+  role:"3D Designer, Motion & Art Direction",
   email: "sujalkalsaria@gmail.com",
   x: "sujalkalsaria",
   linkedin: "sujal-kalsariya-71901523b",
