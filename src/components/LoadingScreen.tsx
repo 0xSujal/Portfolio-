@@ -6,7 +6,14 @@
  * reads as broken rather than loading. The ring's hue keeps turning so the
  * screen never looks stalled even on a slow connection.
  */
-export default function LoadingScreen({ fading }: { fading: boolean }) {
+export default function LoadingScreen({
+  percent,
+  fading,
+}: {
+  /** Share of this page's images actually confirmed loaded, 0–100. */
+  percent: number;
+  fading: boolean;
+}) {
   return (
     <div className={fading ? "loading-screen is-fading" : "loading-screen"} aria-hidden={fading}>
       <div className="loading-mark">
@@ -26,6 +33,7 @@ export default function LoadingScreen({ fading }: { fading: boolean }) {
           <path d="M12 2.75c2.9 2.55 4.5 5.85 4.5 9.25s-1.6 6.7-4.5 9.25c-2.9-2.55-4.5-5.85-4.5-9.25s1.6-6.7 4.5-9.25Z" />
         </svg>
       </div>
+      <p className="loading-percent">{percent}%</p>
     </div>
   );
 }

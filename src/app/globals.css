@@ -904,11 +904,19 @@ a { color: inherit; }
   position: fixed;
   inset: 0;
   z-index: 80;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   background: var(--paper);
   opacity: 1;
   transition: opacity 0.5s ease;
+}
+.loading-percent {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
 }
 .loading-screen.is-fading {
   opacity: 0;
