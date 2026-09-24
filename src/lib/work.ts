@@ -1,6 +1,7 @@
 import type { Post } from "./posts";
 import { GENERATED } from "./work.generated";
 import { MANUAL } from "./manual";
+import { assetUrl } from "./assets";
 
 export type Shot = { src: string; width: number; height: number };
 
@@ -65,11 +66,28 @@ function generatedFor(aliases: string[]): Project[] {
 const manualFor = (id: string) =>
   MANUAL.filter((m) => m.id === id).flatMap((m) => m.projects);
 
+/** Resolves every media path on a project through assetUrl() in one place,
+ *  so every component downstream — Wall, Gallery, WorkList, Expander — gets
+ *  CDN URLs automatically without each one remembering to call it. */
+function resolveProject(p: Project): Project {
+  const shot = (s: SphereShot): SphereShot => ({
+    ...s,
+    src: assetUrl(s.src),
+    clip: s.clip ? assetUrl(s.clip) : s.clip,
+  });
+  return {
+    ...p,
+    cover: assetUrl(p.cover),
+    shots: p.shots?.map(shot),
+    sections: p.sections?.map((sec) => ({ ...sec, shots: sec.shots.map(shot) })),
+  };
+}
+
 export const CATEGORIES: Category[] = [
   ...CANONICAL.map((c) => ({
     id: c.id,
     name: c.name,
-    projects: [...manualFor(c.id), ...generatedFor(c.aliases)],
+    projects: [...manualFor(c.id), ...generatedFor(c.aliases)].map(resolveProject),
   })),
   // A Figma page that matches nothing still shows up rather than vanishing.
   ...GENERATED.filter((g) => !matched.has(g.id)),

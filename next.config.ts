@@ -5,19 +5,18 @@ const nextConfig: NextConfig = {
   // lockfile, which Turbopack would otherwise pick up.
   turbopack: { root: __dirname },
 
-  // Everything the brand importer writes carries a content hash in its
-  // filename, so a given URL can never change. Cache it forever: a repeat
-  // visitor pays nothing to open an image, and this applies to any project
-  // added later without further thought.
-  async headers() {
-    return [
+  // Heavy work assets (video, render stills) live in R2, not /public — see
+  // src/lib/assets.ts. Next's image optimizer needs the remote host
+  // allowlisted to fetch and resize them. Cache-Control for these is set
+  // directly on the R2 object at upload time (scripts/upload-to-r2.mjs),
+  // since Next's own headers() only covers locally-served files.
+  images: {
+    remotePatterns: [
       {
-        source: "/work/marketing-assets/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-        ],
+        protocol: "https",
+        hostname: "pub-4835845db7a34dddabc159a00df2916f.r2.dev",
       },
-    ];
+    ],
   },
 };
 
