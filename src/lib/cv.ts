@@ -32,12 +32,12 @@ export const TIMELINE_FROM = "2021-06";
 export const TIMELINE_TO = "2026-09";
 
 export const CLIENTS: Entry[] = [
-  { year: "2025", title: "Dacoit.design", company: "3D motion graphics", period: "Jan — Jun", from: "2025-01", to: "2025-06" },
-  { year: "2024", title: "Dacoit.design", company: "3D motion graphics", period: "Jul — Dec", from: "2024-07", to: "2024-12" },
-  { year: "2022", title: "MahaDAO", company: "3D assets", period: "Dec — Feb 23", from: "2022-12", to: "2023-02" },
+  { year: "2025", title: "Dacoit.design", company: "3D motion graphics", period: "Jan - Jun", from: "2025-01", to: "2025-06" },
+  { year: "2024", title: "Dacoit.design", company: "3D motion graphics", period: "Jul - Dec", from: "2024-07", to: "2024-12" },
+  { year: "2022", title: "MahaDAO", company: "3D assets", period: "Dec - Feb 23", from: "2022-12", to: "2023-02" },
   { year: "2022", title: "Polygon", company: "3D assets", period: "", from: undefined, to: undefined },
-  { year: "2021", title: "Timeswap", company: "3D animation", period: "Apr — Sep", from: "2021-04", to: "2021-09" },
-  { year: "2021", title: "Polytrade", company: "3D assets", period: "Apr — Jun", from: "2021-04", to: "2021-06" },
+  { year: "2021", title: "Timeswap", company: "3D animation", period: "Apr - Sep", from: "2021-04", to: "2021-09" },
+  { year: "2021", title: "Polytrade", company: "3D assets", period: "Apr - Jun", from: "2021-04", to: "2021-06" },
 ];
 
 /** Earliest `from` to latest `to` across a set of entries, as "N years and M months". */
@@ -60,11 +60,11 @@ export function totalDuration(entries: Entry[]): string {
 }
 
 export const EXPERIENCE: Entry[] = [
-  { year: "2026", title: "Motion Designer", company: "Morphic", logo: "/logos/morphic.png", period: "Sep 2026 — Now", from: "2026-09", to: "2026-09" },
-  { year: "2022", title: "Lead 3D and Visual Designer", company: "KOSH (previously Copperx)", logo: "/logos/kosh.png", period: "Nov 2022 — Aug 2026", from: "2022-11", to: "2026-08" },
-  { year: "2022", title: "Freelance 3D Artist", company: "Freelance", color: "#22C55E", period: "Aug 2022 — Nov 2022 · 4 months", from: "2022-08", to: "2022-11" },
-  { year: "2021", title: "3D Designer", company: "Scallopx", color: "#4C6FFF", logo: "/logos/scallop.png", period: "Sep 2021 — Aug 2022", from: "2021-09", to: "2022-08" },
-  { year: "2021", title: "3D Designer", company: "IconScout", color: "#00C6FF", logo: "/logos/iconscout.png", period: "Jun 2021 — Sep 2021", from: "2021-06", to: "2021-09" },
+  { year: "2026", title: "Motion Designer", company: "Morphic", logo: "/logos/morphic.png", period: "Sep 2026 - Now", from: "2026-07", to: "2026-09" },
+  { year: "2022", title: "Lead 3D and Visual Designer", company: "KOSH (previously Copperx)", logo: "/logos/kosh.png", period: "Nov 2022 - Aug 2026", from: "2022-11", to: "2026-06" },
+  { year: "2022", title: "Freelance 3D Artist", company: "Freelance", color: "#22C55E", period: "Aug 2022 - Nov 2022 · 4 months", from: "2022-08", to: "2022-11" },
+  { year: "2021", title: "3D Designer", company: "Scallopx", color: "#4C6FFF", logo: "/logos/scallop.png", period: "Sep 2021 - Aug 2022", from: "2021-09", to: "2022-08" },
+  { year: "2021", title: "3D Designer", company: "IconScout", color: "#00C6FF", logo: "/logos/iconscout.png", period: "Jun 2021 - Sep 2021", from: "2021-06", to: "2021-09" },
 ];
 
 /** Consecutive entries sharing a year become one group, newest first. */

@@ -32,6 +32,18 @@ function label(month: string) {
 export default function Timeline() {
   const months = useMemo(() => monthsBetween(TIMELINE_FROM, TIMELINE_TO), []);
 
+  // Every point where one role's range starts or ends — the "splits" in the
+  // career, not the sampled ticks, so they land in the same place at any
+  // viewport width. Deduped: adjoining roles usually share a boundary month.
+  const splits = useMemo(() => {
+    const set = new Set<string>();
+    for (const e of EXPERIENCE) {
+      if (e.from) set.add(e.from);
+      if (e.to) set.add(e.to);
+    }
+    return Array.from(set).sort();
+  }, []);
+
   const ruler = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
@@ -150,6 +162,20 @@ export default function Timeline() {
           onPointerDown={onMove}
           role="presentation"
         >
+          {/* Positioned by ratio against the full month range, not the sampled
+              ticks, so a split lands at the same spot regardless of how many
+              ticks fit at the current width. Colour is fixed per dot — it does
+              not read `active`/`index`, so hovering never changes it. */}
+          <div className="tl-dots" aria-hidden="true">
+            {splits.map((m) => (
+              <span
+                key={m}
+                className="tl-dot"
+                style={{ left: `${(months.indexOf(m) / (months.length - 1)) * 100}%` }}
+              />
+            ))}
+          </div>
+
           <div ref={track} className="tl-track">
             {ticks.map((m, i) => {
               // Only the active role's own span, not every role touching the

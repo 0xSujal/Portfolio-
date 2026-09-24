@@ -268,11 +268,32 @@ a { color: inherit; }
 }
 
 .tl-ruler {
+  position: relative;
   /* Tall enough to be an easy hover target; a thin band is hard to hold. */
   padding: 1rem 0;
   /* Leaves vertical panning to the browser and hands us horizontal drags,
      which is the only way to scrub where there is no hover. */
   touch-action: pan-y;
+}
+
+/* Static markers at each role boundary, independent of the scrub state —
+   fixed colour whether or not that point is currently hovered. */
+.tl-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.375rem;
+  height: 4px;
+  pointer-events: none;
+}
+.tl-dot {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--muted);
+  transform: translateX(-50%);
 }
 
 /* Every month is on screen at once. Scrolling the strip meant the early
