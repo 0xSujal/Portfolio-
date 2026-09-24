@@ -63,7 +63,7 @@ export const EXPERIENCE: Entry[] = [
   { year: "2026", title: "Motion Designer", company: "Morphic", logo: "/logos/morphic.png", period: "Sep 2026 - Now · 1 month", from: "2026-07", to: "2026-09" },
   { year: "2022", title: "Lead 3D and Visual Designer", company: "KOSH (Prev. Copperx)", logo: "/logos/kosh.png", period: "Nov 2022 - Aug 2026 · 3 years and 10 months", from: "2022-11", to: "2026-06" },
   { year: "2022", title: "Freelance 3D Artist", company: "Freelance", color: "#22C55E", period: "Aug 2022 - Nov 2022 · 4 months", from: "2022-08", to: "2022-11" },
-  { year: "2021", title: "3D Designer", company: "Scallopx", color: "#4C6FFF", logo: "/logos/scallop.png", period: "Sep 2021 - Aug 2022 · 2 years", from: "2021-09", to: "2022-08" },
+  { year: "2021", title: "3D Designer", company: "Scallopx", color: "#4C6FFF", logo: "/logos/scallop.png", period: "Sep 2021 - Aug 2022 · 1 year", from: "2021-09", to: "2022-08" },
   { year: "2021", title: "3D Designer", company: "IconScout", color: "#00C6FF", logo: "/logos/iconscout.png", period: "Jun 2021 - Sep 2021 · 4 months", from: "2021-06", to: "2021-09" },
 ];
 
