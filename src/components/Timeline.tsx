@@ -7,6 +7,7 @@ import {
   TIMELINE_FROM,
   TIMELINE_TO,
   monthsBetween,
+  sinceLabel,
   type Entry,
 } from "@/lib/cv";
 
@@ -157,7 +158,11 @@ export default function Timeline() {
         </div>
 
         <p className="tl-title">{active?.company || active?.title || "-"}</p>
-        <p className="tl-dates">{active?.period ?? label(month)}</p>
+        <p className="tl-dates">
+          {active?.ongoingSince
+            ? `${active.period} · ${sinceLabel(active.ongoingSince)}`
+            : (active?.period ?? label(month))}
+        </p>
       </div>
 
       <div className="tl-ruler-wrap" ref={wrap}>

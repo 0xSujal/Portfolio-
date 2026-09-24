@@ -26,7 +26,26 @@ export type Entry = {
   logo?: string;
   /** Brand colour, sampled from the logo file. Tints that role's ticks. */
   color?: string;
+  /** Set only on the current role. Its true calendar start, "YYYY-MM" — not
+   *  `from`, which can be pulled earlier than reality to balance the ruler.
+   *  Drives a duration that recomputes against today rather than sitting in
+   *  `period` as text that goes stale the month after it's written. */
+  ongoingSince?: string;
 };
+
+/** Elapsed time from a "YYYY-MM" start through the current month, inclusive —
+ *  same convention as the hand-counted "4 months" on finished roles, just
+ *  computed against today instead of another fixed end. */
+export function sinceLabel(since: string): string {
+  const [sy, sm] = since.split("-").map(Number);
+  const now = new Date();
+  const months = (now.getFullYear() - sy) * 12 + (now.getMonth() + 1 - sm) + 1;
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  const yearPart = years ? `${years} year${years === 1 ? "" : "s"}` : "";
+  const monthPart = rem ? `${rem} month${rem === 1 ? "" : "s"}` : "";
+  return yearPart && monthPart ? `${yearPart} and ${monthPart}` : yearPart || monthPart;
+}
 
 export const TIMELINE_FROM = "2021-06";
 export const TIMELINE_TO = "2026-09";
@@ -60,7 +79,7 @@ export function totalDuration(entries: Entry[]): string {
 }
 
 export const EXPERIENCE: Entry[] = [
-  { year: "2026", title: "Motion Designer", company: "Morphic", logo: "/logos/morphic.png", period: "Sep 2026 - Now · 1 month", from: "2026-07", to: "2026-09" },
+  { year: "2026", title: "Motion Designer", company: "Morphic", logo: "/logos/morphic.png", period: "Sep 2026 - Now", from: "2026-07", to: "2026-09", ongoingSince: "2026-09" },
   { year: "2022", title: "Lead 3D and Visual Designer", company: "KOSH (Prev. Copperx)", logo: "/logos/kosh.png", period: "Nov 2022 - Aug 2026 · 3 years and 10 months", from: "2022-11", to: "2026-06" },
   { year: "2022", title: "Freelance 3D Artist", company: "Freelance", color: "#22C55E", period: "Aug 2022 - Nov 2022 · 4 months", from: "2022-08", to: "2022-11" },
   { year: "2021", title: "3D Designer", company: "Scallopx", color: "#4C6FFF", logo: "/logos/scallop.png", period: "Sep 2021 - Aug 2022 · 1 year", from: "2021-09", to: "2022-08" },
