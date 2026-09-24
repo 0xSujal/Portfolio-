@@ -73,7 +73,7 @@ export default function Home() {
       </section>
 
       <section>
-        <p className="label">Experience — {totalDuration(EXPERIENCE)}</p>
+        <p className="label">Experience - {totalDuration(EXPERIENCE)}</p>
         <Timeline />
       </section>
 

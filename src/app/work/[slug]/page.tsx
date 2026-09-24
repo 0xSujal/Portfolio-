@@ -23,7 +23,7 @@ export async function generateMetadata({
   const project = findProject(slug);
   if (!project) return {};
   return {
-    title: `${project.title} — ${PROFILE.name}`,
+    title: `${project.title} - ${PROFILE.name}`,
     description: project.intro ?? `${project.category.name} work by ${PROFILE.name}.`,
     openGraph: { images: [project.cover] },
   };

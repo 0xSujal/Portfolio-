@@ -41,6 +41,12 @@ export default function Timeline() {
       if (e.from) set.add(e.from);
       if (e.to) set.add(e.to);
     }
+    // "Now" is not a split between two roles, and the open-ended role's own
+    // start only exists to widen its bar for balance — not a real date worth
+    // marking on its own. Its predecessor's end is the one true split there.
+    const current = EXPERIENCE.find((e) => e.to === TIMELINE_TO);
+    set.delete(TIMELINE_TO);
+    if (current?.from) set.delete(current.from);
     return Array.from(set).sort();
   }, []);
 
@@ -150,7 +156,7 @@ export default function Timeline() {
           )}
         </div>
 
-        <p className="tl-title">{active?.company || active?.title || "—"}</p>
+        <p className="tl-title">{active?.company || active?.title || "-"}</p>
         <p className="tl-dates">{active?.period ?? label(month)}</p>
       </div>
 
