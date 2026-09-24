@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Haptics from "@/components/Haptics";
@@ -54,6 +55,7 @@ export default function RootLayout({
         <Haptics />
         <ThemeToggle />
         {children}
+        <Analytics />
       </body>
     </html>
   );
